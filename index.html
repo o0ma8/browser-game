@@ -1,60 +1,53 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <meta name="theme-color" content="#090b1a">
-  <title>اندفاع النيون — لعبة متصفح</title>
-  <style>
-    :root{color-scheme:dark;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 0%,#202456 0,#0e1028 46%,#080914 100%);color:#f5f6ff;display:grid;place-items:center;padding:18px}.wrap{width:min(960px,100%)}header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 2px 12px}.brand{font-weight:900;font-size:clamp(20px,4vw,30px);letter-spacing:.3px}.brand span{color:#62f5db}.stats{display:flex;gap:9px}.pill{padding:8px 13px;border:1px solid #ffffff20;background:#ffffff0b;border-radius:999px;color:#cbd0f5;font-weight:700;white-space:nowrap}.pill b{color:#fff;margin-right:5px}main{position:relative;overflow:hidden;border:1px solid #ffffff24;border-radius:22px;background:#090b1a;box-shadow:0 24px 80px #0009,0 0 42px #695cff18}canvas{display:block;width:100%;height:auto;touch-action:manipulation}.overlay{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(#080a19a8,#080a19bb);text-align:center;padding:22px}.overlay.hidden{display:none}.card{max-width:460px}.card h1{font-size:clamp(30px,7vw,54px);line-height:1.1;margin:0 0 12px;text-shadow:0 0 24px #a67cff77}.card p{color:#d4d7f0;line-height:1.8;margin:0 auto 20px}.button{border:0;border-radius:14px;padding:13px 27px;background:linear-gradient(110deg,#6f63ff,#43e6d1);color:#090b1a;font:inherit;font-weight:900;font-size:17px;cursor:pointer;box-shadow:0 8px 26px #4debd544}.button:active{transform:translateY(2px)}.hint{margin:14px 4px 0;text-align:center;color:#a8add0;font-size:14px}.hint strong{color:#70f2df}.mobile{display:none;justify-content:center;gap:12px;margin-top:12px}.mobile button{width:72px;height:58px;border:1px solid #ffffff28;background:#ffffff12;color:white;border-radius:16px;font-size:24px;touch-action:none}@media(max-width:600px){body{padding:10px}.mobile{display:flex}.pill{padding:7px 10px;font-size:13px}}
-  </style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#090b1a"><title>اندفاع النيون — لعبة متصفح</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 0%,#202456,#0e1028 46%,#080914);color:#f5f6ff;display:grid;place-items:center;padding:18px}.wrap{width:min(960px,100%)}header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 2px 12px}.brand{font-weight:900;font-size:clamp(20px,4vw,30px)}.brand span{color:#62f5db}.stats{display:flex;gap:9px}.pill{padding:8px 13px;border:1px solid #ffffff20;background:#ffffff0b;border-radius:999px;color:#cbd0f5;font-weight:700;white-space:nowrap}.pill b{color:#fff;margin-right:5px}main{position:relative;overflow:hidden;border:1px solid #ffffff24;border-radius:22px;background:#090b1a;box-shadow:0 24px 80px #0009,0 0 42px #695cff18}canvas{display:block;width:100%;touch-action:manipulation}.overlay{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(#080a19a8,#080a19bb);text-align:center;padding:22px}.overlay.hidden{display:none}.card{max-width:460px}.card h1{font-size:clamp(30px,7vw,54px);line-height:1.1;margin:0 0 12px;text-shadow:0 0 24px #a67cff77}.card p{color:#d4d7f0;line-height:1.8;margin:0 auto 20px}.button{border:0;border-radius:14px;padding:13px 27px;background:linear-gradient(110deg,#6f63ff,#43e6d1);color:#090b1a;font:inherit;font-weight:900;font-size:17px;cursor:pointer}.button:active{transform:translateY(2px)}.hint{margin:14px 4px 0;text-align:center;color:#a8add0;font-size:14px}.hint strong{color:#70f2df}.mobile{display:none;justify-content:center;gap:12px;margin-top:12px}.mobile button{width:72px;height:58px;border:1px solid #ffffff28;background:#ffffff12;color:white;border-radius:16px;font-size:24px;touch-action:none}@media(max-width:600px){body{padding:10px}.mobile{display:flex}.pill{padding:7px 10px;font-size:13px}}
+</style>
 </head>
-<body>
-  <div class="wrap">
-    <header><div class="brand">اندفاع <span>النيون</span></div><div class="stats"><div class="pill">النقاط <b id="score">0</b></div><div class="pill">أفضل نتيجة <b id="best">0</b></div></div></header>
-    <main>
-      <canvas id="game" aria-label="لعبة اندفاع النيون"></canvas>
-      <section class="overlay" id="overlay"><div class="card"><h1 id="title">استعد للاندفاع!</h1><p id="message">اقفز فوق الحواجز واجمع البلورات. كلما صمدت أكثر، ازدادت السرعة!</p><button class="button" id="start">ابدأ اللعب</button></div></section>
-    </main>
-    <div class="mobile"><button id="jump" aria-label="اقفز">⬆️</button><button id="duck" aria-label="انخفض">⬇️</button></div>
-    <p class="hint">التحكم: <strong>مسافة / ↑</strong> للقفز · <strong>↓</strong> للانخفاض · على الهاتف استخدم الأزرار أو المس الشاشة</p>
-  </div>
+<body><div class="wrap"><header><div class="brand">اندفاع <span>النيون</span></div><div class="stats"><div class="pill">النقاط <b id="score">0</b></div><div class="pill">أفضل نتيجة <b id="best">0</b></div></div></header><main><canvas id="game" aria-label="لعبة اندفاع النيون"></canvas><section class="overlay" id="overlay"><div class="card"><h1 id="title">استعد للاندفاع!</h1><p id="message">اقفز فوق الحواجز واجمع البلورات. كلما صمدت أكثر، ازدادت السرعة!</p><button class="button" id="start">ابدأ اللعب</button></div></section></main><div class="mobile"><button id="jump" aria-label="اقفز">⬆️ قفز</button><button id="duck" aria-label="انخفض">⬇️ انحناء</button></div><p class="hint">التحكم: <strong>مسافة / ↑</strong> للقفز · <strong>↓</strong> للانخفاض · على الهاتف استخدم الأزرار أو المس الشاشة للقفز</p></div>
 <script>
 (()=>{
-  const canvas=document.querySelector('#game'),ctx=canvas.getContext('2d'),overlay=document.querySelector('#overlay');
-  const scoreEl=document.querySelector('#score'),bestEl=document.querySelector('#best'),titleEl=document.querySelector('#title'),msgEl=document.querySelector('#message');
-  let W=900,H=430,dpr=1,mode='ready',last=0,score=0,best=Number(localStorage.getItem('neon-dash-best')||0),speed=330,spawn=0,world=0,obstacles=[],gems=[],particles=[],stars=[];
-  bestEl.textContent=best;
-  const player={x:125,y:0,w:40,h:56,vy:0,ground:true,duck:0,glow:0};
-  function resize(){const r=canvas.getBoundingClientRect();dpr=Math.min(devicePixelRatio||1,2);W=Math.max(300,r.width);H=Math.max(260,Math.min(500,W*.478));canvas.style.height=H+'px';canvas.width=Math.round(W*dpr);canvas.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);player.y=H-62-player.h;stars=Array.from({length:50},()=>({x:Math.random()*W,y:Math.random()*(H-100),s:Math.random()*1.7+.3,a:Math.random()}));}
-  addEventListener('resize',resize);resize();
-  function reset(){score=0;speed=330;spawn=.9;world=0;obstacles=[];gems=[];particles=[];player.y=H-62-player.h;player.vy=0;player.ground=true;player.duck=0;scoreEl.textContent='0';}
-  function start(){reset();mode='play';overlay.classList.add('hidden');last=performance.now();requestAnimationFrame(loop)}
-  function end(){mode='over';best=Math.max(best,Math.floor(score));localStorage.setItem('neon-dash-best',best);bestEl.textContent=best;titleEl.textContent='انتهت الجولة!';msgEl.textContent=`جمعت ${Math.floor(score)} نقطة. هل تستطيع تحطيم رقمك القياسي؟`;document.querySelector('#start').textContent='العب مرة أخرى';overlay.classList.remove('hidden')}
-  function jump(){if(mode!=='play'){if(mode==='ready'||mode==='over')start();return}if(player.ground){player.vy=-690;player.ground=false;burst(player.x+18,H-58,'#63f5db',9)}}
-  function duck(on){if(mode==='play')player.duck=on?1:0}
-  document.querySelector('#start').addEventListener('click',start);document.querySelector('#jump').addEventListener('pointerdown',e=>{e.preventDefault();jump()});document.querySelector('#duck').addEventListener('pointerdown',e=>{e.preventDefault();duck(true)});['pointerup','pointerleave','pointercancel'].forEach(ev=>document.querySelector('#duck').addEventListener(ev,()=>duck(false)));
-  canvas.addEventListener('pointerdown',e=>{if(mode==='play')jump()});addEventListener('keydown',e=>{if(['Space','ArrowUp','ArrowDown'].includes(e.code))e.preventDefault();if(e.code==='Space'||e.code==='ArrowUp')jump();if(e.code==='ArrowDown')duck(true)});addEventListener('keyup',e=>{if(e.code==='ArrowDown')duck(false)});
-  function burst(x,y,color,n){for(let i=0;i<n;i++)particles.push({x,y,vx:(Math.random()-.5)*230,vy:(Math.random()-.8)*220,life:.35+Math.random()*.45,color})}
-  function rounded(x,y,w,h,r){ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fill()}
-  function draw(){ctx.clearRect(0,0,W,H);const sky=ctx.createLinearGradient(0,0,0,H);sky.addColorStop(0,'#111331');sky.addColorStop(1,'#11152b');ctx.fillStyle=sky;ctx.fillRect(0,0,W,H);
-    for(const s of stars){ctx.globalAlpha=.35+.55*Math.abs(Math.sin(world*.7+s.a*9));ctx.fillStyle='#d9e8ff';ctx.fillRect((s.x-world*(12+s.s*8)%W+W)%W,s.y,s.s,s.s)}ctx.globalAlpha=1;
-    const ground=H-58;ctx.fillStyle='#1b1d3d';ctx.fillRect(0,ground,W,H-ground);ctx.strokeStyle='#5555a8';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(0,ground);ctx.lineTo(W,ground);ctx.stroke();ctx.strokeStyle='#31345f';ctx.lineWidth=2;for(let x=-(world*speed*.22%46);x<W;x+=46){ctx.beginPath();ctx.moveTo(x,ground+19);ctx.lineTo(x+24,ground+19);ctx.stroke()}
-    for(const o of obstacles){ctx.shadowBlur=18;ctx.shadowColor=o.color;ctx.fillStyle=o.color;if(o.type==='block'){rounded(o.x,ground-o.h,o.w,o.h,7);ctx.fillStyle='#fff9';ctx.fillRect(o.x+6,ground-o.h+8,4,o.h-16)}else{ctx.beginPath();ctx.moveTo(o.x,ground);ctx.lineTo(o.x+o.w/2,ground-o.h);ctx.lineTo(o.x+o.w,ground);ctx.closePath();ctx.fill()}ctx.shadowBlur=0}
-    for(const g of gems){ctx.save();ctx.translate(g.x,g.y+Math.sin(world*5+g.phase)*5);ctx.rotate(Math.PI/4);ctx.shadowBlur=18;ctx.shadowColor='#ffe66d';ctx.fillStyle='#ffe66d';ctx.fillRect(-8,-8,16,16);ctx.restore()}
-    const ph=player.duck?30:player.h,py=ground-ph-(player.ground?Math.abs(Math.sin(world*18))*2:0);ctx.save();ctx.shadowBlur=22;ctx.shadowColor='#63f5db';ctx.fillStyle='#63f5db';rounded(player.x,py,player.w,ph,11);ctx.shadowBlur=0;ctx.fillStyle='#111331';ctx.beginPath();ctx.arc(player.x+27,py+13,3,0,Math.PI*2);ctx.fill();ctx.fillStyle='#c1fff4';rounded(player.x-5,py+ph-5,18,8,4);ctx.restore();
-    for(const p of particles){ctx.globalAlpha=Math.max(0,p.life*1.6);ctx.fillStyle=p.color;ctx.fillRect(p.x,p.y,4,4)}ctx.globalAlpha=1;
-  }
-  function loop(now){if(mode!=='play')return;const dt=Math.min((now-last)/1000,.033);last=now;world+=dt;score+=dt*12;speed=Math.min(700,330+score*2.15);scoreEl.textContent=Math.floor(score);const ground=H-58;
-    player.vy+=1750*dt;player.y+=player.vy*dt;if(player.y>=ground-player.h){player.y=ground-player.h;player.vy=0;player.ground=true}
-    spawn-=dt;if(spawn<=0){const type=Math.random()<.65?'block':'spike';const h=type==='block'?38+Math.random()*30:34+Math.random()*16;obstacles.push({x:W+30,w:type==='block'?34+Math.random()*20:35,h,type,color:Math.random()<.5?'#ff5b91':'#9877ff'});if(Math.random()<.78)gems.push({x:W+135,y:ground-100-Math.random()*48,phase:Math.random()*6});spawn=Math.max(.56,1.25-Math.min(score/140, .55))+Math.random()*.35}
-    obstacles.forEach(o=>o.x-=speed*dt);gems.forEach(g=>g.x-=speed*dt);obstacles=obstacles.filter(o=>o.x+o.w>-5);gems=gems.filter(g=>g.x>-20);
-    const px=player.x+6,py=player.y+(player.duck?25:5),pw=player.w-12,ph=player.duck?25:player.h-10;for(const o of obstacles){const oy=ground-o.h;if(px<o.x+o.w-5&&px+pw>o.x+5&&py+ph>oy+4){end();break}}
-    for(let i=gems.length-1;i>=0;i--){const g=gems[i];if(Math.abs(g.x-(player.x+20))<25&&Math.abs(g.y-(player.y+20))<34){score+=25;burst(g.x,g.y,'#ffe66d',12);gems.splice(i,1)}}
-    particles.forEach(p=>{p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=420*dt;p.life-=dt});particles=particles.filter(p=>p.life>0);draw();if(mode==='play')requestAnimationFrame(loop)
-  }
-  draw();
+ const canvas=document.querySelector('#game'),ctx=canvas.getContext('2d'),overlay=document.querySelector('#overlay');
+ const scoreEl=document.querySelector('#score'),bestEl=document.querySelector('#best'),titleEl=document.querySelector('#title'),msgEl=document.querySelector('#message'),startBtn=document.querySelector('#start');
+ let W=900,H=430,dpr=1,mode='ready',last=0,score=0,best=Number(localStorage.getItem('neon-dash-best')||0),speed=330,spawn=0,world=0,obstacles=[],gems=[],particles=[],stars=[];
+ const player={x:125,y:0,w:40,h:56,vy:0,ground:true,duck:false};bestEl.textContent=best;
+ const groundY=()=>H-58;
+ function resize(){const r=canvas.getBoundingClientRect();dpr=Math.min(devicePixelRatio||1,2);W=Math.max(300,r.width);H=Math.max(260,Math.min(500,W*.478));canvas.style.height=H+'px';canvas.width=Math.round(W*dpr);canvas.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);player.y=groundY()-player.h;stars=Array.from({length:50},()=>({x:Math.random()*W,y:Math.random()*(H-100),s:Math.random()*1.7+.3,a:Math.random()}));draw()}
+ addEventListener('resize',resize);
+ function reset(){score=0;speed=330;spawn=.9;world=0;obstacles=[];gems=[];particles=[];player.y=groundY()-player.h;player.vy=0;player.ground=true;player.duck=false;scoreEl.textContent='0'}
+ function start(){if(mode==='play')return;reset();mode='play';overlay.classList.add('hidden');last=performance.now();requestAnimationFrame(loop)}
+ function end(){mode='over';best=Math.max(best,Math.floor(score));localStorage.setItem('neon-dash-best',best);bestEl.textContent=best;titleEl.textContent='انتهت الجولة!';msgEl.textContent=`جمعت ${Math.floor(score)} نقطة. هل تستطيع تحطيم رقمك القياسي؟`;startBtn.textContent='العب مرة أخرى';overlay.classList.remove('hidden')}
+ function jump(){if(mode!=='play')return;player.duck=false;if(player.ground){player.vy=-760;player.ground=false;burst(player.x+18,groundY(),'#63f5db',9)}}
+ function setDuck(on){if(mode==='play')player.duck=on}
+ startBtn.addEventListener('click',start);
+ document.querySelector('#jump').addEventListener('pointerdown',e=>{e.preventDefault();jump()});
+ const duckBtn=document.querySelector('#duck');duckBtn.addEventListener('pointerdown',e=>{e.preventDefault();setDuck(true)});['pointerup','pointerleave','pointercancel'].forEach(ev=>duckBtn.addEventListener(ev,()=>setDuck(false)));
+ canvas.addEventListener('pointerdown',()=>jump());
+ addEventListener('keydown',e=>{if(['Space','ArrowUp','ArrowDown'].includes(e.code))e.preventDefault();if(e.code==='Space'||e.code==='ArrowUp')jump();if(e.code==='ArrowDown')setDuck(true)});
+ addEventListener('keyup',e=>{if(e.code==='ArrowDown')setDuck(false)});
+ function burst(x,y,color,n){for(let i=0;i<n;i++)particles.push({x,y,vx:(Math.random()-.5)*230,vy:(Math.random()-.8)*220,life:.35+Math.random()*.45,color})}
+ function rounded(x,y,w,h,r){ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fill()}
+ function draw(){ctx.clearRect(0,0,W,H);const sky=ctx.createLinearGradient(0,0,0,H);sky.addColorStop(0,'#111331');sky.addColorStop(1,'#11152b');ctx.fillStyle=sky;ctx.fillRect(0,0,W,H);
+  for(const s of stars){ctx.globalAlpha=.35+.55*Math.abs(Math.sin(world*.7+s.a*9));ctx.fillStyle='#d9e8ff';ctx.fillRect((s.x-(world*(12+s.s*8))%W+W)%W,s.y,s.s,s.s)}ctx.globalAlpha=1;
+  const ground=groundY();ctx.fillStyle='#1b1d3d';ctx.fillRect(0,ground,W,H-ground);ctx.strokeStyle='#5555a8';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(0,ground);ctx.lineTo(W,ground);ctx.stroke();ctx.strokeStyle='#31345f';for(let x=-(world*speed*.22%46);x<W;x+=46){ctx.beginPath();ctx.moveTo(x,ground+19);ctx.lineTo(x+24,ground+19);ctx.stroke()}
+  for(const o of obstacles){ctx.shadowBlur=18;ctx.shadowColor=o.color;ctx.fillStyle=o.color;if(o.type==='block'){rounded(o.x,ground-o.h,o.w,o.h,7);ctx.fillStyle='#fff9';ctx.fillRect(o.x+6,ground-o.h+8,4,o.h-16)}else{ctx.beginPath();ctx.moveTo(o.x,ground);ctx.lineTo(o.x+o.w/2,ground-o.h);ctx.lineTo(o.x+o.w,ground);ctx.closePath();ctx.fill()}ctx.shadowBlur=0}
+  for(const g of gems){ctx.save();ctx.translate(g.x,g.y+Math.sin(world*5+g.phase)*5);ctx.rotate(Math.PI/4);ctx.shadowBlur=18;ctx.shadowColor='#ffe66d';ctx.fillStyle='#ffe66d';ctx.fillRect(-8,-8,16,16);ctx.restore()}
+  const ph=player.duck?30:player.h;
+  // Use the physics position here: previously the sprite was always drawn on the floor, hiding jumps.
+  const py=player.duck?ground-ph:player.y;
+  ctx.save();ctx.shadowBlur=22;ctx.shadowColor='#63f5db';ctx.fillStyle='#63f5db';rounded(player.x,py,player.w,ph,11);ctx.shadowBlur=0;ctx.fillStyle='#111331';ctx.beginPath();ctx.arc(player.x+27,py+13,3,0,Math.PI*2);ctx.fill();ctx.fillStyle='#c1fff4';rounded(player.x-5,py+ph-5,18,8,4);ctx.restore();
+  for(const p of particles){ctx.globalAlpha=Math.max(0,p.life*1.6);ctx.fillStyle=p.color;ctx.fillRect(p.x,p.y,4,4)}ctx.globalAlpha=1
+ }
+ function loop(now){if(mode!=='play')return;const dt=Math.min((now-last)/1000,.033);last=now;world+=dt;score+=dt*12;speed=Math.min(700,330+score*2.15);scoreEl.textContent=Math.floor(score);const ground=groundY();
+  player.vy+=1750*dt;player.y+=player.vy*dt;if(player.y>=ground-player.h){player.y=ground-player.h;player.vy=0;player.ground=true}
+  spawn-=dt;if(spawn<=0){const type=Math.random()<.65?'block':'spike',h=type==='block'?38+Math.random()*30:34+Math.random()*16;obstacles.push({x:W+30,w:type==='block'?34+Math.random()*20:35,h,type,color:Math.random()<.5?'#ff5b91':'#9877ff'});if(Math.random()<.78)gems.push({x:W+135,y:ground-100-Math.random()*48,phase:Math.random()*6});spawn=Math.max(.56,1.25-Math.min(score/140,.55))+Math.random()*.35}
+  obstacles.forEach(o=>o.x-=speed*dt);gems.forEach(g=>g.x-=speed*dt);obstacles=obstacles.filter(o=>o.x+o.w>-5);gems=gems.filter(g=>g.x>-20);
+  const px=player.x+6,py=player.y+(player.duck?25:5),pw=player.w-12,ph=player.duck?25:player.h-10;for(const o of obstacles){const oy=ground-o.h;if(px<o.x+o.w-5&&px+pw>o.x+5&&py+ph>oy+4){end();break}}
+  for(let i=gems.length-1;i>=0;i--){const g=gems[i];if(Math.abs(g.x-(player.x+20))<25&&Math.abs(g.y-(player.y+20))<34){score+=25;burst(g.x,g.y,'#ffe66d',12);gems.splice(i,1)}}
+  particles.forEach(p=>{p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=420*dt;p.life-=dt});particles=particles.filter(p=>p.life>0);draw();if(mode==='play')requestAnimationFrame(loop)
+ }
+ resize();
 })();
-</script>
-</body>
-</html>
+</script></body></html>
