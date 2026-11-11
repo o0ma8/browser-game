@@ -1,53 +1,68 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#090b1a"><title>اندفاع النيون — لعبة متصفح</title>
-<style>
-:root{color-scheme:dark;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 0%,#202456,#0e1028 46%,#080914);color:#f5f6ff;display:grid;place-items:center;padding:18px}.wrap{width:min(960px,100%)}header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 2px 12px}.brand{font-weight:900;font-size:clamp(20px,4vw,30px)}.brand span{color:#62f5db}.stats{display:flex;gap:9px}.pill{padding:8px 13px;border:1px solid #ffffff20;background:#ffffff0b;border-radius:999px;color:#cbd0f5;font-weight:700;white-space:nowrap}.pill b{color:#fff;margin-right:5px}main{position:relative;overflow:hidden;border:1px solid #ffffff24;border-radius:22px;background:#090b1a;box-shadow:0 24px 80px #0009,0 0 42px #695cff18}canvas{display:block;width:100%;touch-action:manipulation}.overlay{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(#080a19a8,#080a19bb);text-align:center;padding:22px}.overlay.hidden{display:none}.card{max-width:460px}.card h1{font-size:clamp(30px,7vw,54px);line-height:1.1;margin:0 0 12px;text-shadow:0 0 24px #a67cff77}.card p{color:#d4d7f0;line-height:1.8;margin:0 auto 20px}.button{border:0;border-radius:14px;padding:13px 27px;background:linear-gradient(110deg,#6f63ff,#43e6d1);color:#090b1a;font:inherit;font-weight:900;font-size:17px;cursor:pointer}.button:active{transform:translateY(2px)}.hint{margin:14px 4px 0;text-align:center;color:#a8add0;font-size:14px}.hint strong{color:#70f2df}.mobile{display:none;justify-content:center;gap:12px;margin-top:12px}.mobile button{width:72px;height:58px;border:1px solid #ffffff28;background:#ffffff12;color:white;border-radius:16px;font-size:24px;touch-action:none}@media(max-width:600px){body{padding:10px}.mobile{display:flex}.pill{padding:7px 10px;font-size:13px}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f8ff">
+  <meta name="description" content="ألعاب ذهنية لطيفة للأطفال: اكتشف النمط ودرّب ذاكرتك.">
+  <title>حديقة الأذكياء — ألعاب ذهنية للأطفال</title>
+  <style>
+    :root{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#26324a;background:#f3f8ff;font-synthesis:none}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -15%,#fff 0,#f1f7ff 58%,#eaf3ff 100%)}button{font:inherit}.page{width:min(920px,100%);margin:auto;padding:20px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:6px 0 18px}.logo{font-size:clamp(23px,5vw,34px);font-weight:950;color:#344a85}.logo span{color:#ff9e43}.score{background:white;border:1px solid #e3eaf7;padding:9px 15px;border-radius:999px;font-weight:800;box-shadow:0 4px 14px #26324a0b}.score b{color:#7959da}.panel{background:#fff;border:1px solid #e3eaf7;border-radius:28px;padding:clamp(18px,4vw,36px);box-shadow:0 18px 50px #526b9712}.welcome{text-align:center}.mascot{font-size:64px;line-height:1.2}.welcome h1{font-size:clamp(28px,6vw,46px);margin:7px 0;color:#334780}.welcome p,.sub{color:#68758e;line-height:1.8;font-size:17px}.activities{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:24px}.activity{border:2px solid #e9edfa;border-radius:22px;background:#fcfdff;padding:22px 18px;text-align:center;cursor:pointer;transition:.18s;color:#293653}.activity:hover,.activity:focus-visible{transform:translateY(-3px);border-color:#a696fa;box-shadow:0 10px 24px #745be51a;outline:none}.activity .icon{font-size:48px}.activity h2{margin:8px 0}.activity p{color:#748098;line-height:1.6;margin:0}.game{display:none}.game.active{display:block}.welcome.hidden{display:none}.game-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:15px}.back,.small-btn{border:1px solid #e1e7f2;background:#fff;border-radius:12px;padding:9px 14px;font-weight:750;color:#52617d;cursor:pointer}.back:hover,.small-btn:hover{background:#f5f6ff}.stage{color:#68758e;font-weight:800}.title{text-align:center;margin:8px 0 5px;font-size:clamp(25px,5vw,36px);color:#354b87}.instruction{text-align:center;margin:0 auto 20px;color:#6b7891;line-height:1.7}.pattern-row{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:clamp(7px,2vw,15px);min-height:105px;margin:18px auto 22px}.tile{width:clamp(48px,10vw,76px);height:clamp(58px,12vw,84px);display:grid;place-items:center;border-radius:18px;background:#f2f5ff;border:2px solid #e7ebfa;font-size:clamp(27px,6vw,43px);box-shadow:0 4px 0 #e1e6f4}.question{font-size:30px;color:#a8b1c5;font-weight:900}.answers{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin:12px 0}.answer{width:70px;height:70px;border:2px solid #e5e9f4;background:#fff;border-radius:20px;font-size:38px;cursor:pointer;box-shadow:0 5px 0 #e8ecf5;transition:.14s}.answer:hover:not(:disabled){transform:translateY(-3px);border-color:#9c8bf1}.answer:disabled{cursor:default}.answer.correct{background:#e4faee;border-color:#65c88a}.answer.wrong{background:#fff0eb;border-color:#f1a08c}.feedback{min-height:32px;text-align:center;font-size:18px;font-weight:850;color:#31885c}.feedback.error{color:#ce7254}.memory-board{display:grid;grid-template-columns:repeat(2,minmax(110px,170px));justify-content:center;gap:14px;margin:20px auto}.pad{height:104px;border:0;border-radius:24px;font-size:43px;cursor:pointer;box-shadow:0 7px 0 #00000014;transition:transform .12s,filter .12s;touch-action:manipulation}.pad:active,.pad.lit{transform:scale(.94);filter:brightness(1.2)}.pad[data-i="0"]{background:#ffd9e2}.pad[data-i="1"]{background:#d8e9ff}.pad[data-i="2"]{background:#dcf7e4}.pad[data-i="3"]{background:#fff0c7}.memory-actions{text-align:center}.primary{border:0;border-radius:14px;padding:12px 22px;background:#725bd7;color:#fff;font-weight:850;font-size:16px;cursor:pointer;box-shadow:0 5px 0 #5943b2}.primary:hover{background:#624dc4}.primary:disabled{opacity:.55;cursor:default}.memory-status{text-align:center;color:#68758e;font-weight:750;min-height:28px}.progress{height:10px;background:#eef1fa;border-radius:99px;overflow:hidden;margin:22px auto 0;max-width:440px}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#ffb34e,#8f79ed);border-radius:99px;transition:width .25s}.footer{text-align:center;color:#8792a6;font-size:13px;margin:17px 0 2px}.confetti{font-size:26px}@media(max-width:600px){.page{padding:12px}.panel{border-radius:22px}.activities{grid-template-columns:1fr}.activity{padding:17px}.memory-board{gap:11px}.pad{height:88px}.top{margin-top:2px}.score{font-size:14px;padding:8px 11px}}
+  </style>
 </head>
-<body><div class="wrap"><header><div class="brand">اندفاع <span>النيون</span></div><div class="stats"><div class="pill">النقاط <b id="score">0</b></div><div class="pill">أفضل نتيجة <b id="best">0</b></div></div></header><main><canvas id="game" aria-label="لعبة اندفاع النيون"></canvas><section class="overlay" id="overlay"><div class="card"><h1 id="title">استعد للاندفاع!</h1><p id="message">اقفز فوق الحواجز واجمع البلورات. كلما صمدت أكثر، ازدادت السرعة!</p><button class="button" id="start">ابدأ اللعب</button></div></section></main><div class="mobile"><button id="jump" aria-label="اقفز">⬆️ قفز</button><button id="duck" aria-label="انخفض">⬇️ انحناء</button></div><p class="hint">التحكم: <strong>مسافة / ↑</strong> للقفز · <strong>↓</strong> للانخفاض · على الهاتف استخدم الأزرار أو المس الشاشة للقفز</p></div>
+<body>
+  <div class="page">
+    <header class="top"><div class="logo">حديقة <span>الأذكياء</span> 🌈</div><div class="score">نجومك ⭐ <b id="score">0</b></div></header>
+    <main class="panel">
+      <section class="welcome" id="welcome">
+        <div class="mascot" aria-hidden="true">🦊🌻</div>
+        <h1>مرحبًا بك في حديقة الأذكياء!</h1>
+        <p>هيا نلعب ونتدرّب على التركيز والذاكرة واكتشاف الأنماط. اختر لعبة وابدأ مغامرتك — لا يوجد وقت محدد، خذ راحتك 😊</p>
+        <div class="activities">
+          <button class="activity" id="choose-pattern"><div class="icon" aria-hidden="true">🔍🟡🔵</div><h2>محقق الأنماط</h2><p>اكتشف ما الذي يأتي بعد ذلك في سلسلة الأشكال والألوان.</p></button>
+          <button class="activity" id="choose-memory"><div class="icon" aria-hidden="true">🧠✨</div><h2>حديقة الذاكرة</h2><p>شاهد تسلسل الأضواء، ثم أعده بالترتيب الصحيح.</p></button>
+        </div>
+      </section>
+      <section class="game" id="pattern-game" aria-live="polite">
+        <div class="game-head"><button class="back" data-back>← الألعاب</button><span class="stage" id="pattern-stage">الجولة 1</span></div>
+        <h1 class="title">محقق الأنماط 🕵️</h1><p class="instruction">فكّر جيدًا: أي صورة تكمل السلسلة؟</p>
+        <div class="pattern-row" id="sequence" aria-label="سلسلة الأنماط"></div>
+        <div class="answers" id="answers" aria-label="اختر الإجابة"></div>
+        <div class="feedback" id="pattern-feedback" role="status" aria-live="polite"></div>
+        <div class="progress" aria-label="التقدم"><span id="pattern-progress"></span></div>
+      </section>
+      <section class="game" id="memory-game" aria-live="polite">
+        <div class="game-head"><button class="back" data-back>← الألعاب</button><span class="stage" id="memory-stage">المستوى 1</span></div>
+        <h1 class="title">حديقة الذاكرة 🧠</h1><p class="instruction">ركّز على الألوان، ثم اضغطها بنفس الترتيب.</p>
+        <div class="memory-status" id="memory-status" role="status" aria-live="polite">اضغط «اعرض التسلسل» عندما تكون مستعدًا.</div>
+        <div class="memory-board" id="memory-board"></div>
+        <div class="memory-actions"><button class="primary" id="show-sequence">اعرض التسلسل</button></div>
+        <div class="feedback" id="memory-feedback" role="status" aria-live="polite"></div>
+        <div class="progress"><span id="memory-progress"></span></div>
+      </section>
+    </main>
+    <p class="footer">لعبة تعليمية مجانية — لا تجمع معلومات شخصية ولا تحتاج إلى تسجيل دخول.</p>
+  </div>
 <script>
 (()=>{
- const canvas=document.querySelector('#game'),ctx=canvas.getContext('2d'),overlay=document.querySelector('#overlay');
- const scoreEl=document.querySelector('#score'),bestEl=document.querySelector('#best'),titleEl=document.querySelector('#title'),msgEl=document.querySelector('#message'),startBtn=document.querySelector('#start');
- let W=900,H=430,dpr=1,mode='ready',last=0,score=0,best=Number(localStorage.getItem('neon-dash-best')||0),speed=330,spawn=0,world=0,obstacles=[],gems=[],particles=[],stars=[];
- const player={x:125,y:0,w:40,h:56,vy:0,ground:true,duck:false};bestEl.textContent=best;
- const groundY=()=>H-58;
- function resize(){const r=canvas.getBoundingClientRect();dpr=Math.min(devicePixelRatio||1,2);W=Math.max(300,r.width);H=Math.max(260,Math.min(500,W*.478));canvas.style.height=H+'px';canvas.width=Math.round(W*dpr);canvas.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);player.y=groundY()-player.h;stars=Array.from({length:50},()=>({x:Math.random()*W,y:Math.random()*(H-100),s:Math.random()*1.7+.3,a:Math.random()}));draw()}
- addEventListener('resize',resize);
- function reset(){score=0;speed=330;spawn=.9;world=0;obstacles=[];gems=[];particles=[];player.y=groundY()-player.h;player.vy=0;player.ground=true;player.duck=false;scoreEl.textContent='0'}
- function start(){if(mode==='play')return;reset();mode='play';overlay.classList.add('hidden');last=performance.now();requestAnimationFrame(loop)}
- function end(){mode='over';best=Math.max(best,Math.floor(score));localStorage.setItem('neon-dash-best',best);bestEl.textContent=best;titleEl.textContent='انتهت الجولة!';msgEl.textContent=`جمعت ${Math.floor(score)} نقطة. هل تستطيع تحطيم رقمك القياسي؟`;startBtn.textContent='العب مرة أخرى';overlay.classList.remove('hidden')}
- function jump(){if(mode!=='play')return;player.duck=false;if(player.ground){player.vy=-760;player.ground=false;burst(player.x+18,groundY(),'#63f5db',9)}}
- function setDuck(on){if(mode==='play')player.duck=on}
- startBtn.addEventListener('click',start);
- document.querySelector('#jump').addEventListener('pointerdown',e=>{e.preventDefault();jump()});
- const duckBtn=document.querySelector('#duck');duckBtn.addEventListener('pointerdown',e=>{e.preventDefault();setDuck(true)});['pointerup','pointerleave','pointercancel'].forEach(ev=>duckBtn.addEventListener(ev,()=>setDuck(false)));
- canvas.addEventListener('pointerdown',()=>jump());
- addEventListener('keydown',e=>{if(['Space','ArrowUp','ArrowDown'].includes(e.code))e.preventDefault();if(e.code==='Space'||e.code==='ArrowUp')jump();if(e.code==='ArrowDown')setDuck(true)});
- addEventListener('keyup',e=>{if(e.code==='ArrowDown')setDuck(false)});
- function burst(x,y,color,n){for(let i=0;i<n;i++)particles.push({x,y,vx:(Math.random()-.5)*230,vy:(Math.random()-.8)*220,life:.35+Math.random()*.45,color})}
- function rounded(x,y,w,h,r){ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fill()}
- function draw(){ctx.clearRect(0,0,W,H);const sky=ctx.createLinearGradient(0,0,0,H);sky.addColorStop(0,'#111331');sky.addColorStop(1,'#11152b');ctx.fillStyle=sky;ctx.fillRect(0,0,W,H);
-  for(const s of stars){ctx.globalAlpha=.35+.55*Math.abs(Math.sin(world*.7+s.a*9));ctx.fillStyle='#d9e8ff';ctx.fillRect((s.x-(world*(12+s.s*8))%W+W)%W,s.y,s.s,s.s)}ctx.globalAlpha=1;
-  const ground=groundY();ctx.fillStyle='#1b1d3d';ctx.fillRect(0,ground,W,H-ground);ctx.strokeStyle='#5555a8';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(0,ground);ctx.lineTo(W,ground);ctx.stroke();ctx.strokeStyle='#31345f';for(let x=-(world*speed*.22%46);x<W;x+=46){ctx.beginPath();ctx.moveTo(x,ground+19);ctx.lineTo(x+24,ground+19);ctx.stroke()}
-  for(const o of obstacles){ctx.shadowBlur=18;ctx.shadowColor=o.color;ctx.fillStyle=o.color;if(o.type==='block'){rounded(o.x,ground-o.h,o.w,o.h,7);ctx.fillStyle='#fff9';ctx.fillRect(o.x+6,ground-o.h+8,4,o.h-16)}else{ctx.beginPath();ctx.moveTo(o.x,ground);ctx.lineTo(o.x+o.w/2,ground-o.h);ctx.lineTo(o.x+o.w,ground);ctx.closePath();ctx.fill()}ctx.shadowBlur=0}
-  for(const g of gems){ctx.save();ctx.translate(g.x,g.y+Math.sin(world*5+g.phase)*5);ctx.rotate(Math.PI/4);ctx.shadowBlur=18;ctx.shadowColor='#ffe66d';ctx.fillStyle='#ffe66d';ctx.fillRect(-8,-8,16,16);ctx.restore()}
-  const ph=player.duck?30:player.h;
-  // Use the physics position here: previously the sprite was always drawn on the floor, hiding jumps.
-  const py=player.duck?ground-ph:player.y;
-  ctx.save();ctx.shadowBlur=22;ctx.shadowColor='#63f5db';ctx.fillStyle='#63f5db';rounded(player.x,py,player.w,ph,11);ctx.shadowBlur=0;ctx.fillStyle='#111331';ctx.beginPath();ctx.arc(player.x+27,py+13,3,0,Math.PI*2);ctx.fill();ctx.fillStyle='#c1fff4';rounded(player.x-5,py+ph-5,18,8,4);ctx.restore();
-  for(const p of particles){ctx.globalAlpha=Math.max(0,p.life*1.6);ctx.fillStyle=p.color;ctx.fillRect(p.x,p.y,4,4)}ctx.globalAlpha=1
- }
- function loop(now){if(mode!=='play')return;const dt=Math.min((now-last)/1000,.033);last=now;world+=dt;score+=dt*12;speed=Math.min(700,330+score*2.15);scoreEl.textContent=Math.floor(score);const ground=groundY();
-  player.vy+=1750*dt;player.y+=player.vy*dt;if(player.y>=ground-player.h){player.y=ground-player.h;player.vy=0;player.ground=true}
-  spawn-=dt;if(spawn<=0){const type=Math.random()<.65?'block':'spike',h=type==='block'?38+Math.random()*30:34+Math.random()*16;obstacles.push({x:W+30,w:type==='block'?34+Math.random()*20:35,h,type,color:Math.random()<.5?'#ff5b91':'#9877ff'});if(Math.random()<.78)gems.push({x:W+135,y:ground-100-Math.random()*48,phase:Math.random()*6});spawn=Math.max(.56,1.25-Math.min(score/140,.55))+Math.random()*.35}
-  obstacles.forEach(o=>o.x-=speed*dt);gems.forEach(g=>g.x-=speed*dt);obstacles=obstacles.filter(o=>o.x+o.w>-5);gems=gems.filter(g=>g.x>-20);
-  const px=player.x+6,py=player.y+(player.duck?25:5),pw=player.w-12,ph=player.duck?25:player.h-10;for(const o of obstacles){const oy=ground-o.h;if(px<o.x+o.w-5&&px+pw>o.x+5&&py+ph>oy+4){end();break}}
-  for(let i=gems.length-1;i>=0;i--){const g=gems[i];if(Math.abs(g.x-(player.x+20))<25&&Math.abs(g.y-(player.y+20))<34){score+=25;burst(g.x,g.y,'#ffe66d',12);gems.splice(i,1)}}
-  particles.forEach(p=>{p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=420*dt;p.life-=dt});particles=particles.filter(p=>p.life>0);draw();if(mode==='play')requestAnimationFrame(loop)
- }
- resize();
+  const $=s=>document.querySelector(s), welcome=$('#welcome'), scoreNode=$('#score');
+  let stars=0, patternRound=0, patternAnswer=null, memoryLevel=1, memorySequence=[], memoryInput=[], memoryLocked=true, activeGame='';
+  const symbols=['🍎','⭐','🐠','🌼','🚀','🍉','🦋','🎈','🌙','🐢','🍓','☀️'];
+  const pads=['🍓','🌊','🍀','☀️'];
+  function updateScore(){scoreNode.textContent=stars}
+  function showGame(which){welcome.classList.add('hidden');$('#pattern-game').classList.toggle('active',which==='pattern');$('#memory-game').classList.toggle('active',which==='memory');activeGame=which;if(which==='pattern')newPattern();else prepareMemory()}
+  function back(){welcome.classList.remove('hidden');$('#pattern-game').classList.remove('active');$('#memory-game').classList.remove('active');activeGame=''}
+  document.querySelectorAll('[data-back]').forEach(b=>b.addEventListener('click',back));$('#choose-pattern').addEventListener('click',()=>showGame('pattern'));$('#choose-memory').addEventListener('click',()=>showGame('memory'));
+  function newPattern(){patternRound++;$('#pattern-stage').textContent=`الجولة ${patternRound}`;$('#pattern-progress').style.width=`${Math.min(100,(patternRound-1)*10)}%`;const cycleLen=patternRound<3?2:patternRound<6?3:4;const pool=[...symbols].sort(()=>Math.random()-.5).slice(0,cycleLen);const shown=cycleLen+2+Math.min(2,Math.floor(patternRound/5));patternAnswer=pool[shown%cycleLen];const row=$('#sequence');row.innerHTML='';for(let i=0;i<shown;i++){const tile=document.createElement('span');tile.className='tile';tile.textContent=pool[i%cycleLen];row.append(tile)}const mark=document.createElement('span');mark.className='question';mark.textContent='؟';row.append(mark);const choices=[patternAnswer];while(choices.length<4){const candidate=symbols[Math.floor(Math.random()*symbols.length)];if(!choices.includes(candidate))choices.push(candidate)}choices.sort(()=>Math.random()-.5);const box=$('#answers');box.innerHTML='';choices.forEach(sym=>{const btn=document.createElement('button');btn.className='answer';btn.textContent=sym;btn.setAttribute('aria-label',`اختر ${sym}`);btn.addEventListener('click',()=>answerPattern(btn,sym));box.append(btn)});$('#pattern-feedback').textContent='';$('#pattern-feedback').className='feedback'}
+  function answerPattern(btn,sym){const feedback=$('#pattern-feedback');if(sym===patternAnswer){feedback.textContent=['أحسنت! إجابة رائعة! 🌟','ممتاز! اكتشفت النمط! 🎉','يا لك من محقق ذكي! 🕵️'][Math.floor(Math.random()*3)];feedback.className='feedback';stars++;updateScore();$('#answers').querySelectorAll('button').forEach(b=>b.disabled=true);$('#pattern-progress').style.width=`${Math.min(100,patternRound*10)}%`;setTimeout(()=>{if(activeGame==='pattern')newPattern()},1100)}else{btn.disabled=true;btn.classList.add('wrong');feedback.textContent='محاولة جميلة! راقب الصور التي تتكرر وجرّب مرة أخرى 💪';feedback.className='feedback error'}}
+  const board=$('#memory-board');pads.forEach((emoji,i)=>{const b=document.createElement('button');b.className='pad';b.dataset.i=i;b.textContent=emoji;b.setAttribute('aria-label',`لون ${i+1}`);b.addEventListener('click',()=>tapPad(i));board.append(b)});
+  function prepareMemory(){memoryLocked=true;memoryInput=[];memorySequence=[];memoryLevel=Math.max(memoryLevel,1);$('#memory-stage').textContent=`المستوى ${memoryLevel}`;$('#memory-progress').style.width=`${Math.min(100,(memoryLevel-1)*12)}%`;$('#memory-status').textContent='اضغط «اعرض التسلسل» عندما تكون مستعدًا.';$('#memory-feedback').textContent='';$('#show-sequence').disabled=false;$('#show-sequence').textContent='اعرض التسلسل'}
+  const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+  async function playSequence(){if(!memoryLocked)return;memoryLocked=true;memoryInput=[];memorySequence=Array.from({length:Math.min(2+memoryLevel,8)},()=>Math.floor(Math.random()*pads.length));$('#show-sequence').disabled=true;$('#memory-feedback').textContent='';$('#memory-status').textContent='شاهد الأضواء وتذكّر ترتيبها 👀';await wait(450);for(const index of memorySequence){if(activeGame!=='memory')return;const pad=board.querySelector(`[data-i="${index}"]`);pad.classList.add('lit');await wait(570);pad.classList.remove('lit');await wait(260)}if(activeGame!=='memory')return;memoryLocked=false;$('#memory-status').textContent=`دورك! كرّر الأضواء بالترتيب (${memorySequence.length} أضواء).`}
+  $('#show-sequence').addEventListener('click',playSequence);
+  function tapPad(index){if(memoryLocked||activeGame!=='memory')return;memoryInput.push(index);const pos=memoryInput.length-1;if(memorySequence[pos]!==index){memoryLocked=true;$('#memory-status').textContent='لا بأس! الذاكرة تصبح أقوى مع التدريب.';$('#memory-feedback').textContent='اقتربت! شاهد التسلسل مرة أخرى وحاول مجددًا 🌱';$('#memory-feedback').className='feedback error';$('#show-sequence').disabled=false;$('#show-sequence').textContent='حاول مرة أخرى';memoryInput=[];return}if(memoryInput.length===memorySequence.length){memoryLocked=true;memoryLevel++;stars++;updateScore();$('#memory-stage').textContent=`المستوى ${memoryLevel}`;$('#memory-progress').style.width=`${Math.min(100,(memoryLevel-1)*12)}%`;$('#memory-status').textContent='';$('#memory-feedback').textContent='رائع! تذكّرت التسلسل كاملًا! 🎊';$('#memory-feedback').className='feedback';$('#show-sequence').disabled=false;$('#show-sequence').textContent='المستوى التالي'}}
+  updateScore();
 })();
-</script></body></html>
+</script>
+</body>
+</html>
